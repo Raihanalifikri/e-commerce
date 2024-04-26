@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Cara membuat group
 Route::name('admin.')->prefix('admin')->middleware('admin')->group(function(){
     Route::get('/dashboard', [\App\Http\Controllers\Admin\dashboardController::class, 'index'])->name('dashboard');
+    Route::resource('/category', CategoryController::class)->except(['show','edit','create']);
 });
 
 Route::name('user.')->prefix('user')->middleware('user')->group(function(){
