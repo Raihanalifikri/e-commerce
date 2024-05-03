@@ -30,7 +30,7 @@
                         <th>No.</th>
                         <th>Name</th>
                         <th>Image</th>
-                        <th>Action</th>
+                        <th>Action</th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -69,28 +69,3 @@
 
 @endsection
 
-@push('script')
-    <script src="text/javascript">
-    ;function($){
-        function readURL(input){
-            var $prev = $('preview-logo')
-
-        if(input.files && input.files[0]){
-            var reader = new FileReader();
-
-            reader.onload = function(e){
-                $prev.attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
-            $prev.attr('class', '')
-        } else{
-            $prev.attr('class', 'visually-hidden')
-        }
-        }
-        $('#image').on('change', function(){
-            readURL(this);
-        });
-    }(jQuery);
-    </script>
-@endpush
