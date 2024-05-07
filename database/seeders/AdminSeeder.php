@@ -21,5 +21,5 @@ class AdminSeeder extends Seeder
 
         $user->save();
     }
-
+    
 }

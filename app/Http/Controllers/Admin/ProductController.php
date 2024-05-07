@@ -8,7 +8,9 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use GuzzleHttp\Handler\Proxy;
 use Illuminate\Support\Facades\Storage;
+use Mockery\Expectation;
 
 class ProductController extends Controller
 {
@@ -45,7 +47,7 @@ class ProductController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'category_id' => 'required',
-            'price' => 'required',
+            'price' => 'required|integer',
             'description' => 'required'
         ]);
 
@@ -77,14 +79,14 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //get data by id
-        $product = Product::findorFail($id);
-        $category = Category::all();
+        $product = Product::findOrFail($id);
+        $category = Category::select('id', 'name')->get();
 
         return view('pages.admin.product.edit', compact(
             'product',
-            'category'
+            'category'  
         ));
+
     }
 
     /**
@@ -93,38 +95,30 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
 
-        //Melakukan Validasi
+        // Vlidate 
         $this->validate($request, [
             'name' => 'required',
             'category_id' => 'required',
-            'price' => 'required',
+            'price' => 'required|integer',
             'description' => 'required'
         ]);
 
         try {
-            //get data by id
-            $product = Product::find($id);
-            //jika image kosong
-            if ($request->file('image') == '') {
-                $data = $request->all();
-                $data['slug'] = Str::slug($request->name);
+            $data = $request->all();
+            $data['slug'] = Str::slug('$request->name');
 
-                $product->update($data);
+            $product = Product::findOrFail($id);
+            $product->update($data);
 
-                return redirect()->back()->with('success', 'category Berhasil diubah');
-            } else {
+            return redirect()->route('admin.product.index')->with('success', 'data berhasil di edit');
 
-                // Update data
-                $data = $request->all();
-                $data['slug'] = Str::slug($request->name);
-
-                $product->update($data);
-
-                return redirect()->route('admin.product.index')->with('success', 'Kamu berhasil Mengupdate News 👍');
-            }
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Failed Something wrong');
+        } catch (Expectation $e) {
+            return redirect()->back()->with('error');
         }
+
+
+
+
     }
 
     /**
