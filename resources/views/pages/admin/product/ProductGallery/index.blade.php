@@ -13,23 +13,53 @@
                 </ol>
             </nav>
 
-            <a href="" class="btn btn-primary">
-                <i class="bi bi-plus"></i>Tambah Gambar</a>
+            <!-- Basic Modal -->
+           
+
+            <div class="col-md-12">
+                <a href="{{ route('admin.product.index') }}" class="btn btn-primary">
+                    <i class="bi bi-arrow-left"></i>
+                </a>
+
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
+                    <i class="bi bi-plus"></i> Product Gallery
+                </button>
+                @include('pages.admin.product.ProductGallery.modal-craete')
+            </div>
+
+
+
+            <!-- End Basic Modal-->
 
             <table class="table">
                 <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Image</th>
-                            <th>Action</th>
-                        </tr>
+                    <tr>
+                        <th>No.</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </tr>
                 </thead>
                 <tbody>
+                    @forelse ($product->product_galleries as $row)
                     <tr>
-                        <td>1.</td>
-                        <td>Image</td>
-                        <td>Action</td>
-                    </tr>
+                      <td>{{ $loop->iteration }}</td>
+                      <td>
+                        <img src="{{ url('storage/product/gallery', $row->image) }}" alt="" width="100">
+                      </td>
+                      <td>
+                        <form action="{{ route('admin.product.gallery.destroy', [$product->id, $row->id]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                      </td>
+                    </tr> 
+                    @empty
+                        <td colspan="3" class="text-center">Data Not Fond Or Empty</td>
+                    @endforelse
+                    
                 </tbody>
             </table>
         </div>
