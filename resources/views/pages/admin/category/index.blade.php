@@ -53,7 +53,7 @@
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </form>
-                            
+                                
                         </td>
                     </tr>
                     @empty

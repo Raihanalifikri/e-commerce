@@ -1,20 +1,6 @@
 @extends('layouts.parent')
 @section('title', 'Dashboard - Admin')
 @section('content')
-    {{-- <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">With Home Icon</h5>
-
-            <nav>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house-door"></i></a></li>
-                    <li class="breadcrumb-item"><a href="#">Library</a></li>
-                    <li class="breadcrumb-item active">Default</li>
-                </ol>
-            </nav>
-        </div>
-    </div> --}}
-
     <div class="section dashboard">
       <div class="col-xxl-4 col-xl-12">
 
@@ -23,7 +9,7 @@
   
           <div class="card-body">
             <h5 class="card-title">Dashboard <span> <span class="badge bg-success text-white"><i class="bi bi-check-circle me-1"></i> | {{ Auth::user()->role }}</span></span></h5>
-  
+
             <div class="d-flex align-items-center">
               <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                 <i class="bi bi-people"></i>
@@ -53,7 +39,7 @@
 
                         <div class="d-flex align-items-center">
                             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                <i class="bi bi-cart"></i>
+                                <i class="bi bi-briefcase-fill"></i>
                             </div>
                             <div class="ps-3">
                                 <h6>{{ $category }}</h6>
