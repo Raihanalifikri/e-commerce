@@ -24,7 +24,7 @@ class ProfileController extends Controller
         $this->validate($request, [
             'current_password' => 'required',
             'password' => 'required|min:3',
-            'confirmation_password' => 'required|min:3'
+            'confirm_password' => 'required|min:3'
         ]);
         //check current status
         $currentPasswordStatus = Hash::check(
@@ -32,7 +32,7 @@ class ProfileController extends Controller
             auth()->user()->password
         );
         if ($currentPasswordStatus) {
-            if ($request->password == $request->confirmation_password) {
+            if ($request->password == $request->confirm_password) {
                 // Mendapatkan pengguna yang sedang login
                 $user = auth()->user();
                 // Memperbarui kata sandi

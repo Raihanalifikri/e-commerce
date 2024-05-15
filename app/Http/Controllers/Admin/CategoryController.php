@@ -132,20 +132,20 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        try {
-            //get dadt by id
-            $category = Category::find($id);
+            try {
+                //get dadt by id
+                $category = Category::find($id);
 
-            // Hapus image lama
-            // basename itu untuk mengambil nama file
-            Storage::disk('local')->delete('public/category/' . basename($category->image));
+                // Hapus image lama
+                // basename itu untuk mengambil nama file
+                Storage::disk('local')->delete('public/category/' . basename($category->image));
 
-            // Hapus data
-            $category->delete();
+                // Hapus data
+                $category->delete();
 
-            return redirect()->back()->with('success', 'data berhaisl di hapus');
-        } catch (Exception $th) {
-            return redirect()->back()->with('error', 'Failed Someting Wrong!');
-        }
+                return redirect()->back()->with('success', 'data berhaisl di hapus');
+            } catch (Exception $th) {
+                return redirect()->back()->with('error', 'Failed Someting Wrong!');
+            }
     }
 }

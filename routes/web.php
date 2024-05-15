@@ -24,16 +24,18 @@ Route::name('admin.')->prefix('admin')->middleware('admin')->group(function(){
     Route::resource('/userList', UserController::class);
     Route::resource('/transection', TransactionController::class);
     Route::resource('/my-transection', MyTransactionController::class)->only(['index', 'show']);
+    Route::get('/changePassword', [\App\Http\Controllers\profile\ProfileController::class, 'changePassword'])->name('profile.changePassword');
+    Route::put('/updatePassword', [\App\Http\Controllers\profile\ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
 });
 
 Route::name('user.')->prefix('user')->middleware('user')->group(function(){
     Route::get('/dashboard', [\App\Http\Controllers\User\dashboardController::class, 'index'])->name('dashboard');
     Route::resource('/my-transection', MyTransactionController::class)->only(['index', 'show']);
+    Route::get('/changePassword', [\App\Http\Controllers\profile\ProfileController::class, 'changePassword'])->name('profile.changePassword');
+    Route::put('/updatePassword', [\App\Http\Controllers\profile\ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
 });
 
 
 Route::middleware('auth')->group(function(){
     Route::get('/profile', [\App\Http\Controllers\profile\ProfileController::class, 'index'])->name('profile.index');
-    Route::get('/changePassword', [\App\Http\Controllers\profile\ProfileController::class, 'changePassword'])->name('profile.changePassword');
-    Route::put('/updatePassword', [\App\Http\Controllers\profile\ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
 });

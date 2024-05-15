@@ -15,8 +15,9 @@
                         </div>
                         <div class="ps-3">
                             <h6>{{ $user }}</h6>
-                            <span class="text-danger small pt-1 fw-bold">Telah Terdaftar :{{ $user }} pengguna</span>           
-                          </div>
+                            <span class="text-danger small pt-1 fw-bold">Telah Terdaftar :{{ $user }}
+                                pengguna</span>
+                        </div>
                     </div>
 
                 </div>
@@ -41,20 +42,22 @@
                 </thead>
                 <tbody class="table-white">
                     @forelse ($users as $row)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $row->name }}</td>
-                        <td>{{ $row->email }}</td>
-                        <td>
-                            <button class="btn btn-primary">
-                                <i class="bi bi-nut-fill"></i> Change Password
-                            </button>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $row->name }}</td>
+                            <td>{{ $row->email }}</td>
+                            <td>
+                                <!-- Basic Modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#basicModal">
+                                    Basic Modal
+                                </button>
+                                @include('pages.admin.modal-changePassword')
+                            </td>
+                        </tr>
                     @empty
-                        
                     @endforelse
-                    
+
                 </tbody>
             </table>
         </div>
