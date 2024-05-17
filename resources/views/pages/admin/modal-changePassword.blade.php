@@ -7,7 +7,7 @@
                     aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('profile.updatePassword') }}" method="post">
+                <form action="{{ route('user.profile.updatePassword') }}" method="post">
                     @csrf
                     @method('PUT')
                         <div class="col-12">

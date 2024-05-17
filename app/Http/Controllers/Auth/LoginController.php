@@ -25,7 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-           protected function redirectTo()
+    protected function redirectTo()
     {
         if (auth()->user()->role == 'admin') {
             return '/admin/dashboard';
@@ -33,7 +33,7 @@ class LoginController extends Controller
             return '/user/dashboard';
         } else {
             return '/home';
-        }   
+        }
     }
 
     /**

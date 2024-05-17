@@ -631,7 +631,7 @@ video {
           appearance: none;
 }
 
-.bg-fixed{
+. -fixed{
   background-attachment: fixed;
 }
 
